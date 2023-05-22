@@ -69,23 +69,29 @@ if (!function_exists('multi_upload')) {
 }
 
 if (!function_exists('creation')) {
-    function creation($name, $modelName = null, $translateModel = false,$photoModel = false)
+    function creation($name, $modelName = null, $translateModel = false, $photoModel = false)
     {
         Artisan::call('make:controller Backend/' . $name . 'Controller --resource');
         Artisan::call('create-status-route ' . Str::lower($name) . ' ' . $name);
         Artisan::call('create-delete-route ' . Str::lower($name) . ' ' . $name);
         Artisan::call('create-resource-route ' . Str::lower($name) . ' ' . $name);
         Artisan::call('make:controller Api/' . $name . 'Controller');
-        $permissionSeederCommand = "sed -i \"s/\\\$permissions = \\\[/\\\$permissions = \\\[\\n        '".Str::lower($name)."',/\" database/seeders/PermissionsSeeder.php";
+        Artisan::call('fill-controller:functions ' . $name);
+        Artisan::call('fill-api-controller-command ' . $name);
+
+        $permissionSeederCommand = "sed -i \"s/\\\$permissions = \\\[/\\\$permissions = \\\[\\n        '" . Str::lower($name) . "',/\" database/seeders/PermissionsSeeder.php";
         exec($permissionSeederCommand);
         if ($modelName != null) {
             Artisan::call('make:model ' . $modelName . ' -m');
+            Artisan::call('main-model ' . $modelName);
         }
         if ($translateModel) {
             Artisan::call('make:model ' . $modelName . 'Translation -m');
+            Artisan::call('translation-model ' . $modelName . 'Translation');
         }
-        if ($translateModel) {
+        if ($photoModel) {
             Artisan::call('make:model ' . $modelName . 'Photos -m');
+            Artisan::call('photo-model ' . $modelName . 'Photos');
         }
         add_permission(Str::lower($name));
         Artisan::call('app:create-blade ' . Str::lower($name));
@@ -97,7 +103,6 @@ if (!function_exists('check_permission')) {
     function check_permission($permission_name)
     {
         return abort_if(Gate::denies($permission_name), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
     }
 }
 

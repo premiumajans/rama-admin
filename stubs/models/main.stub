@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class Product extends Model implements TranslatableContract
+class $controller extends Model implements TranslatableContract
 {
     use Translatable, LogsActivity;
 
@@ -18,7 +18,7 @@ class Product extends Model implements TranslatableContract
 
     public function photos()
     {
-        return $this->hasMany(ProductPhotos::class);
+        return $this->hasMany($controllerPhotos::class);
     }
 
     public function getActivitylogOptions(): LogOptions

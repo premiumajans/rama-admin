@@ -37,6 +37,8 @@ class Kernel extends HttpKernel
     ];
     protected $commands = [
         \App\Console\Commands\CreateBlade::class,
+        \App\Console\Commands\FillControllerCommand::class,
+        \App\Console\Commands\FindMigrationNameCommand::class,
     ];
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,

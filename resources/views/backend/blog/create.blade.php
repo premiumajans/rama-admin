@@ -25,26 +25,32 @@
                                                         <input name="name[{{ $lan->code }}]" type="text"
                                                                class="form-control"
                                                                required="" placeholder="@lang('backend.name')">
-                                                        <div class="valid-feedback">
-                                                            @lang('backend.name') @lang('messages.is-correct')
-                                                        </div>
-                                                        <div class="invalid-feedback">
-                                                            @lang('backend.name') @lang('messages.not-correct')
-                                                        </div>
+                                                        {!! validation_response('backend.name') !!}
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label>@lang('backend.description') <span class="text-danger">*</span></label>
+                                                        <textarea name="description[{{ $lan->code }}]" type="text"
+                                                                  class="form-control" id="elm{{$lan->code}}1"
+                                                                  required=""
+                                                                  placeholder="@lang('backend.description')"></textarea>
+                                                        {!! validation_response('backend.description') !!}
                                                     </div>
                                                 </div>
                                             </div>
                                         @endforeach
                                         <div class="mb-3">
-                                            <label>@lang('backend.slug') <span class="text-danger">*</span></label>
-                                            <input name="slug" type="text" class="form-control" required
-                                                   placeholder="/news">
-                                            <div class="valid-feedback">
-                                                @lang('backend.slug') @lang('messages.is-correct')
-                                            </div>
-                                            <div class="invalid-feedback">
-                                                @lang('backend.slug') @lang('messages.not-correct')
-                                            </div>
+                                            <label>@lang('backend.photo') <span class="text-danger">*</span></label>
+                                            <input name="photo[{{ $lan->code }}]" type="text"
+                                                   class="form-control"
+                                                   required="" placeholder="@lang('backend.photo')">
+                                            {!! validation_response('backend.photo') !!}
+                                        </div>
+                                        <div class="mb-3">
+                                            <label>@lang('backend.photos')</label>
+                                            <input type="file" class="form-control mb-2" id="photos" name="photos[]"
+                                                   multiple>
+                                            {!! validation_response('backend.photos') !!}
+                                            <div id="image-preview-container" class="d-flex flex-wrap"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -56,4 +62,8 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    @include('backend.templates.components.tiny')
+    @include('backend.templates.components.preview-images')
 @endsection

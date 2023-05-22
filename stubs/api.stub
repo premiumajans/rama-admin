@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use App\Models\$controller;
+
+class $controllerController extends Controller
+{
+    public function index()
+    {
+        if ($controller::where('status', 1)->exists()) {
+            return response()->json(['$name' => $controller::where('status', 1)->with('photos')->get()], 200);
+        } else {
+            return response()->json(['$name' => '$controller-is-empty'], 404);
+        }
+    }
+
+    public function show($id)
+    {
+        if ($controller::where('status', 1)->where('id', $id)->exists()) {
+            return response()->json(['$name' => $controller::where('status', 1)->where('id', $id)->first()], 200);
+        } else {
+            return response()->json(['$name' => '$name-is-not-founded'], 404);
+        }
+    }
+}

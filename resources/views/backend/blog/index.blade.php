@@ -22,8 +22,8 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>@lang('backend.slug'):</th>
-                                <th>@lang('backend.time'):</th>
+                                <th>@lang('backend.photo'):</th>
+                                <th>@lang('backend.name'):</th>
                                 <th>@lang('backend.actions'):</th>
                             </tr>
                             </thead>
@@ -31,9 +31,9 @@
                             @foreach($blogs as $blog)
                                 <tr>
                                     <td>{{ $blog->id }}</td>
-                                    <td>{{ $blog->slug }}</td>
                                     <td>{{ date('d.m.Y H:i:s',strtotime($blog->created_at)) }}</td>
-                                    @include('backend.templates.components.dt-settings',['variable' => 'blog','value' => $value])
+                                    <td>{{ $blog->slug }}</td>
+                                    @include('backend.templates.components.dt-settings',['variable' => 'blog','value' => $blog])
                                 </tr>
                             @endforeach
                             </tbody>

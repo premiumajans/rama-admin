@@ -167,4 +167,5 @@
   'product' => '',
   'portfolio' => '',
   'blog' => '',
+  'salam' => '',
 );

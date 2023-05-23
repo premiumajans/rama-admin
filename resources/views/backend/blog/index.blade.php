@@ -31,8 +31,8 @@
                             @foreach($blogs as $blog)
                                 <tr>
                                     <td>{{ $blog->id }}</td>
-                                    <td>{{ date('d.m.Y H:i:s',strtotime($blog->created_at)) }}</td>
-                                    <td>{{ $blog->slug }}</td>
+                                    <td><img src="{{ asset($blog->photo) }}" style="width: 120px;height: 80px;"></td>
+                                    <td>{{ $blog->translate(app()->getLocale())->name ?? '-' }}</td>
                                     @include('backend.templates.components.dt-settings',['variable' => 'blog','value' => $blog])
                                 </tr>
                             @endforeach

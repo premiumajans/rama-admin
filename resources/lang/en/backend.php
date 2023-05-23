@@ -222,4 +222,5 @@
   'product' => '',
   'portfolio' => '',
   'blog' => '',
+  'salam' => '',
 );

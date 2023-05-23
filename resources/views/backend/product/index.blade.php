@@ -22,8 +22,8 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>@lang('backend.slug'):</th>
-                                <th>@lang('backend.time'):</th>
+                                <th>@lang('backend.photo'):</th>
+                                <th>@lang('backend.name'):</th>
                                 <th>@lang('backend.actions'):</th>
                             </tr>
                             </thead>
@@ -31,9 +31,9 @@
                             @foreach($products as $product)
                                 <tr>
                                     <td>{{ $product->id }}</td>
-                                    <td>{{ $product->slug }}</td>
-                                    <td>{{ date('d.m.Y H:i:s',strtotime($product->created_at)) }}</td>
-                                    @include('backend.templates.components.dt-settings',['variable' => 'product','value' => $value])
+                                    <td><img src="{{ asset($product->photo) }}" style="width: 120px;height: 80px;"></td>
+                                    <td>{{ $product->translate(app()->getLocale())->name ?? '-' }}</td>
+                                    @include('backend.templates.components.dt-settings',['variable' => 'product','value' => $product])
                                 </tr>
                             @endforeach
                             </tbody>

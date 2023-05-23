@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Helpers\CRUDHelper;
 use App\Models\AltCategory;
 use App\Models\AltCategoryTranslation;
 use App\Models\Category;
@@ -17,5 +18,10 @@ class HomeController extends Controller
     public function index()
     {
         return view('backend.dashboard', get_defined_vars());
+    }
+
+    public function deletePhoto($modelName, $id)
+    {
+        CRUDHelper::remove_item('\App\Models\\' . $modelName . 'Photos', $id);
     }
 }

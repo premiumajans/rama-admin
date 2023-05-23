@@ -30,7 +30,22 @@ class MediaController extends Controller
     {
         check_permission('media create');
         try {
-
+            $media = new Media();
+            $media->photo = upload('media', $request->file('photo'));
+            $media->save();
+            foreach (active_langs() as $lang) {
+                $translation = new MediaTranslation();
+                $translation->locale = $lang->code;
+                $translation->media_id = $media->id;
+                $translation->name = $request->name[$lang->code];
+                $translation->description = $request->description[$lang->code];
+                $translation->save();
+            }
+            foreach (multi_upload('media', $request->file('photos')) as $photo) {
+                $mediaPhoto = new MediaPhotos();
+                $mediaPhoto->photo = $photo;
+                $media->photos()->save($mediaPhoto);
+            };
             alert()->success(__('messages.success'));
             return redirect(route('backend.media.index'));
         } catch (Exception $e) {
@@ -52,7 +67,23 @@ class MediaController extends Controller
         try {
             $media = Media::where('id', $id)->with('photos')->first();
             DB::transaction(function () use ($request, $media) {
-
+                if ($request->hasFile('photo')) {
+                    if (file_exists($media->photo)) {
+                        unlink(public_path($media->photo));
+                    }
+                    $media->photo = upload('media', $request->file('photo'));
+                }
+                if ($request->hasFile('photos')) {
+                    foreach (multi_upload('media', $request->file('photos')) as $photo) {
+                        $mediaPhoto = new MediaPhotos();
+                        $mediaPhoto->photo = $photo;
+                        $media->photos()->save($mediaPhoto);
+                    }
+                }
+                foreach (active_langs() as $lang) {
+                    $media->translate($lang->code)->name = $request->name[$lang->code];
+                    $media->translate($lang->code)->description = $request->description[$lang->code];
+                }
                 $media->save();
             });
             alert()->success(__('messages.success'));

@@ -22,8 +22,8 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>@lang('backend.slug'):</th>
-                                <th>@lang('backend.time'):</th>
+                                <th>@lang('backend.photo'):</th>
+                                <th>@lang('backend.name'):</th>
                                 <th>@lang('backend.actions'):</th>
                             </tr>
                             </thead>
@@ -31,9 +31,9 @@
                             @foreach($portfolios as $portfolio)
                                 <tr>
                                     <td>{{ $portfolio->id }}</td>
-                                    <td>{{ $portfolio->slug }}</td>
-                                    <td>{{ date('d.m.Y H:i:s',strtotime($portfolio->created_at)) }}</td>
-                                    @include('backend.templates.components.dt-settings',['variable' => 'portfolio','value' => $value])
+                                    <td><img src="{{ asset($portfolio->photo) }}" style="width: 120px;height: 80px;"></td>
+                                    <td>{{ $portfolio->translate(app()->getLocale())->name ?? '-' }}</td>
+                                    @include('backend.templates.components.dt-settings',['variable' => 'portfolio','value' => $portfolio])
                                 </tr>
                             @endforeach
                             </tbody>

@@ -36,8 +36,16 @@ class BlogController extends Controller
             foreach (active_langs() as $lang) {
                 $translation = new BlogTranslation();
                 $translation->locale = $lang->code;
-//                $translation->
+                $translation->blog_id = $blog->id;
+                $translation->name = $request->name[$lang->code];
+                $translation->description = $request->description[$lang->code];
+                $translation->save();
             }
+            foreach (multi_upload('blog', $request->file('photos')) as $photo) {
+                $blogPhoto = new BlogPhotos();
+                $blogPhoto->photo = $photo;
+                $blog->photos()->save($blogPhoto);
+            };
             alert()->success(__('messages.success'));
             return redirect(route('backend.blog.index'));
         } catch (Exception $e) {
@@ -59,7 +67,23 @@ class BlogController extends Controller
         try {
             $blog = Blog::where('id', $id)->with('photos')->first();
             DB::transaction(function () use ($request, $blog) {
-
+                if ($request->hasFile('photo')) {
+                    if (file_exists($blog->photo)) {
+                        unlink(public_path($blog->photo));
+                    }
+                    $blog->photo = upload('blog', $request->file('photo'));
+                }
+                if ($request->hasFile('photos')) {
+                    foreach (multi_upload('blog', $request->file('photos')) as $photo) {
+                        $blogPhoto = new BlogPhotos();
+                        $blogPhoto->photo = $photo;
+                        $blog->photos()->save($blogPhoto);
+                    }
+                }
+                foreach (active_langs() as $lang) {
+                    $blog->translate($lang->code)->name = $request->name[$lang->code];
+                    $blog->translate($lang->code)->description = $request->description[$lang->code];
+                }
                 $blog->save();
             });
             alert()->success(__('messages.success'));

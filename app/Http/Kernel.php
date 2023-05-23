@@ -2,6 +2,8 @@
 
 namespace App\Http;
 
+use App\Console\Commands\Controllers\FillApiControllerCommand;
+use App\Console\Commands\Routes\Backend\CreateIndexRoute;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -36,9 +38,10 @@ class Kernel extends HttpKernel
         ],
     ];
     protected $commands = [
-        \App\Console\Commands\CreateBlade::class,
-        \App\Console\Commands\FillControllerCommand::class,
-        \App\Console\Commands\FindMigrationNameCommand::class,
+        \App\Console\Commands\view\CreateBlade::class,
+        \App\Console\Commands\Controllers\FillControllerCommand::class,
+        \App\Console\Commands\Routes\Api\CreateIndexRoute::class,
+        \App\Console\Commands\Controllers\FillApiControllerCommand::class,
     ];
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,

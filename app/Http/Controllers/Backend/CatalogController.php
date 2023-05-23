@@ -30,7 +30,22 @@ class CatalogController extends Controller
     {
         check_permission('catalog create');
         try {
-
+            $catalog = new Catalog();
+            $catalog->photo = upload('catalog', $request->file('photo'));
+            $catalog->save();
+            foreach (active_langs() as $lang) {
+                $translation = new CatalogTranslation();
+                $translation->locale = $lang->code;
+                $translation->catalog_id = $catalog->id;
+                $translation->name = $request->name[$lang->code];
+                $translation->description = $request->description[$lang->code];
+                $translation->save();
+            }
+            foreach (multi_upload('catalog', $request->file('photos')) as $photo) {
+                $catalogPhoto = new CatalogPhotos();
+                $catalogPhoto->photo = $photo;
+                $catalog->photos()->save($catalogPhoto);
+            };
             alert()->success(__('messages.success'));
             return redirect(route('backend.catalog.index'));
         } catch (Exception $e) {
@@ -52,7 +67,23 @@ class CatalogController extends Controller
         try {
             $catalog = Catalog::where('id', $id)->with('photos')->first();
             DB::transaction(function () use ($request, $catalog) {
-
+                if ($request->hasFile('photo')) {
+                    if (file_exists($catalog->photo)) {
+                        unlink(public_path($catalog->photo));
+                    }
+                    $catalog->photo = upload('catalog', $request->file('photo'));
+                }
+                if ($request->hasFile('photos')) {
+                    foreach (multi_upload('catalog', $request->file('photos')) as $photo) {
+                        $catalogPhoto = new CatalogPhotos();
+                        $catalogPhoto->photo = $photo;
+                        $catalog->photos()->save($catalogPhoto);
+                    }
+                }
+                foreach (active_langs() as $lang) {
+                    $catalog->translate($lang->code)->name = $request->name[$lang->code];
+                    $catalog->translate($lang->code)->description = $request->description[$lang->code];
+                }
                 $catalog->save();
             });
             alert()->success(__('messages.success'));

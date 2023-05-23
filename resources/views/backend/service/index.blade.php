@@ -22,8 +22,8 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>@lang('backend.slug'):</th>
-                                <th>@lang('backend.time'):</th>
+                                <th>@lang('backend.photo'):</th>
+                                <th>@lang('backend.name'):</th>
                                 <th>@lang('backend.actions'):</th>
                             </tr>
                             </thead>
@@ -31,9 +31,9 @@
                             @foreach($services as $service)
                                 <tr>
                                     <td>{{ $service->id }}</td>
-                                    <td>{{ $service->slug }}</td>
-                                    <td>{{ date('d.m.Y H:i:s',strtotime($service->created_at)) }}</td>
-                                    @include('backend.templates.components.dt-settings',['variable' => 'service','value' => $value])
+                                    <td><img src="{{ asset($service->photo) }}" style="width: 120px;height: 80px;"></td>
+                                    <td>{{ $service->translate(app()->getLocale())->name ?? '-' }}</td>
+                                    @include('backend.templates.components.dt-settings',['variable' => 'service','value' => $service])
                                 </tr>
                             @endforeach
                             </tbody>

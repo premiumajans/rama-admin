@@ -22,8 +22,8 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>@lang('backend.slug'):</th>
-                                <th>@lang('backend.time'):</th>
+                                <th>@lang('backend.photo'):</th>
+                                <th>@lang('backend.name'):</th>
                                 <th>@lang('backend.actions'):</th>
                             </tr>
                             </thead>
@@ -31,9 +31,9 @@
                             @foreach($medias as $media)
                                 <tr>
                                     <td>{{ $media->id }}</td>
-                                    <td>{{ $media->slug }}</td>
-                                    <td>{{ date('d.m.Y H:i:s',strtotime($media->created_at)) }}</td>
-                                    @include('backend.templates.components.dt-settings',['variable' => 'media','value' => $value])
+                                    <td><img src="{{ asset($media->photo) }}" style="width: 120px;height: 80px;"></td>
+                                    <td>{{ $media->translate(app()->getLocale())->name ?? '-' }}</td>
+                                    @include('backend.templates.components.dt-settings',['variable' => 'media','value' => $media])
                                 </tr>
                             @endforeach
                             </tbody>

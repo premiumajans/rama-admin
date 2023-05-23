@@ -23,7 +23,6 @@
                             <tr>
                                 <th>ID</th>
                                 <th>@lang('backend.slug'):</th>
-                                <th>@lang('backend.time'):</th>
                                 <th>@lang('backend.actions'):</th>
                             </tr>
                             </thead>
@@ -32,8 +31,7 @@
                                 <tr>
                                     <td>{{ $selection->id }}</td>
                                     <td>{{ $selection->slug }}</td>
-                                    <td>{{ date('d.m.Y H:i:s',strtotime($selection->created_at)) }}</td>
-                                    @include('backend.templates.components.dt-settings',['variable' => 'selection','value' => $value])
+                                    @include('backend.templates.components.dt-settings',['variable' => 'selection','value' => $selection])
                                 </tr>
                             @endforeach
                             </tbody>

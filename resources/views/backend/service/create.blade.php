@@ -20,32 +20,13 @@
                                                  id="{{ $lan->code }}"
                                                  role="tabpanel">
                                                 <div class="form-group row">
-                                                    <div class="mb-3">
-                                                        <label>@lang('backend.name') <span class="text-danger">*</span></label>
-                                                        <input name="name[{{ $lan->code }}]" type="text"
-                                                               class="form-control"
-                                                               required="" placeholder="@lang('backend.name')">
-                                                        <div class="valid-feedback">
-                                                            @lang('backend.name') @lang('messages.is-correct')
-                                                        </div>
-                                                        <div class="invalid-feedback">
-                                                            @lang('backend.name') @lang('messages.not-correct')
-                                                        </div>
-                                                    </div>
+                                                    @include('backend.templates.items.create.validations.name')
+                                                    @include('backend.templates.items.create.validations.description')
                                                 </div>
                                             </div>
                                         @endforeach
-                                        <div class="mb-3">
-                                            <label>@lang('backend.slug') <span class="text-danger">*</span></label>
-                                            <input name="slug" type="text" class="form-control" required
-                                                   placeholder="/news">
-                                            <div class="valid-feedback">
-                                                @lang('backend.slug') @lang('messages.is-correct')
-                                            </div>
-                                            <div class="invalid-feedback">
-                                                @lang('backend.slug') @lang('messages.not-correct')
-                                            </div>
-                                        </div>
+                                        @include('backend.templates.items.create.validations.photo')
+                                        @include('backend.templates.items.create.validations.photos')
                                     </div>
                                 </div>
                                 @include('backend.templates.components.buttons')
@@ -56,4 +37,8 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    @include('backend.templates.components.tiny')
+    @include('backend.templates.components.preview-images')
 @endsection

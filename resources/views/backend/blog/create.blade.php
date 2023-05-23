@@ -20,38 +20,13 @@
                                                  id="{{ $lan->code }}"
                                                  role="tabpanel">
                                                 <div class="form-group row">
-                                                    <div class="mb-3">
-                                                        <label>@lang('backend.name') <span class="text-danger">*</span></label>
-                                                        <input name="name[{{ $lan->code }}]" type="text"
-                                                               class="form-control"
-                                                               required="" placeholder="@lang('backend.name')">
-                                                        {!! validation_response('backend.name') !!}
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label>@lang('backend.description') <span class="text-danger">*</span></label>
-                                                        <textarea name="description[{{ $lan->code }}]" type="text"
-                                                                  class="form-control" id="elm{{$lan->code}}1"
-                                                                  required=""
-                                                                  placeholder="@lang('backend.description')"></textarea>
-                                                        {!! validation_response('backend.description') !!}
-                                                    </div>
+                                                    @include('backend.templates.items.create.validations.name')
+                                                    @include('backend.templates.items.create.validations.description')
                                                 </div>
                                             </div>
                                         @endforeach
-                                        <div class="mb-3">
-                                            <label>@lang('backend.photo') <span class="text-danger">*</span></label>
-                                            <input name="photo[{{ $lan->code }}]" type="text"
-                                                   class="form-control"
-                                                   required="" placeholder="@lang('backend.photo')">
-                                            {!! validation_response('backend.photo') !!}
-                                        </div>
-                                        <div class="mb-3">
-                                            <label>@lang('backend.photos')</label>
-                                            <input type="file" class="form-control mb-2" id="photos" name="photos[]"
-                                                   multiple>
-                                            {!! validation_response('backend.photos') !!}
-                                            <div id="image-preview-container" class="d-flex flex-wrap"></div>
-                                        </div>
+                                        @include('backend.templates.items.create.validations.photo')
+                                        @include('backend.templates.items.create.validations.photos')
                                     </div>
                                 </div>
                                 @include('backend.templates.components.buttons')

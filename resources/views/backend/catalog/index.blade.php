@@ -1,5 +1,5 @@
 @extends('master.backend')
-@section('title',__('backend.catalog'))
+@section('title',__('backend.blog'))
 @section('styles')
     @include('backend.templates.components.dt-styles')
 @endsection
@@ -22,8 +22,8 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>@lang('backend.slug'):</th>
-                                <th>@lang('backend.time'):</th>
+                                <th>@lang('backend.photo'):</th>
+                                <th>@lang('backend.name'):</th>
                                 <th>@lang('backend.actions'):</th>
                             </tr>
                             </thead>
@@ -31,9 +31,9 @@
                             @foreach($catalogs as $catalog)
                                 <tr>
                                     <td>{{ $catalog->id }}</td>
-                                    <td>{{ $catalog->slug }}</td>
-                                    <td>{{ date('d.m.Y H:i:s',strtotime($catalog->created_at)) }}</td>
-                                    @include('backend.templates.components.dt-settings',['variable' => 'catalog','value' => $value])
+                                    <td><img src="{{ asset($catalog->photo) }}" style="width: 120px;height: 80px;"></td>
+                                    <td>{{ $catalog->translate(app()->getLocale())->name ?? '-' }}</td>
+                                    @include('backend.templates.components.dt-settings',['variable' => 'catalog','value' => $catalog])
                                 </tr>
                             @endforeach
                             </tbody>

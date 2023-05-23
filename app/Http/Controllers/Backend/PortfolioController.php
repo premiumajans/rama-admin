@@ -30,7 +30,22 @@ class PortfolioController extends Controller
     {
         check_permission('portfolio create');
         try {
-
+            $portfolio = new Portfolio();
+            $portfolio->photo = upload('portfolio', $request->file('photo'));
+            $portfolio->save();
+            foreach (active_langs() as $lang) {
+                $translation = new PortfolioTranslation();
+                $translation->locale = $lang->code;
+                $translation->portfolio_id = $portfolio->id;
+                $translation->name = $request->name[$lang->code];
+                $translation->description = $request->description[$lang->code];
+                $translation->save();
+            }
+            foreach (multi_upload('portfolio', $request->file('photos')) as $photo) {
+                $portfolioPhoto = new PortfolioPhotos();
+                $portfolioPhoto->photo = $photo;
+                $portfolio->photos()->save($portfolioPhoto);
+            };
             alert()->success(__('messages.success'));
             return redirect(route('backend.portfolio.index'));
         } catch (Exception $e) {
@@ -52,7 +67,23 @@ class PortfolioController extends Controller
         try {
             $portfolio = Portfolio::where('id', $id)->with('photos')->first();
             DB::transaction(function () use ($request, $portfolio) {
-
+                if ($request->hasFile('photo')) {
+                    if (file_exists($portfolio->photo)) {
+                        unlink(public_path($portfolio->photo));
+                    }
+                    $portfolio->photo = upload('portfolio', $request->file('photo'));
+                }
+                if ($request->hasFile('photos')) {
+                    foreach (multi_upload('portfolio', $request->file('photos')) as $photo) {
+                        $portfolioPhoto = new PortfolioPhotos();
+                        $portfolioPhoto->photo = $photo;
+                        $portfolio->photos()->save($portfolioPhoto);
+                    }
+                }
+                foreach (active_langs() as $lang) {
+                    $portfolio->translate($lang->code)->name = $request->name[$lang->code];
+                    $portfolio->translate($lang->code)->description = $request->description[$lang->code];
+                }
                 $portfolio->save();
             });
             alert()->success(__('messages.success'));

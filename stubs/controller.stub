@@ -30,7 +30,23 @@ class $controllerController extends Controller
     {
         check_permission('$name create');
         try {
-
+            $$name = new $controller();
+            $$name->photo = upload('$name', $request->file('photo'));
+            $$name->save();
+            foreach (active_langs() as $lang) {
+                $translation = new $controllerTranslation();
+                $translation->locale = $lang->code;
+                $translation->$name_id = $$name->id;
+                $translation->name = $request->name[$lang->code];
+                $translation->description = $request->description[$lang->code];
+                $translation->save();
+            }
+            foreach (multi_upload('$name',$request->file('photos')) as $photo)
+            {
+                $$namePhoto = new $controllerPhotos();
+                $$namePhoto->photo = $photo;
+                $$name->photos()->save($namePhoto);
+            };
             alert()->success(__('messages.success'));
             return redirect(route('backend.$name.index'));
         } catch (Exception $e) {
@@ -52,7 +68,23 @@ class $controllerController extends Controller
         try {
             $$name = $controller::where('id', $id)->with('photos')->first();
             DB::transaction(function () use ($request, $$name) {
-
+                if($request->hasFile('photo')){
+                if(file_exists($$name->photo)){
+                unlink(public_path($$name->photo));
+                }
+                $$name->photo = upload('$name',$request->file('photo'));
+                }
+                if ($request->hasFile('photos')) {
+                                    foreach (multi_upload('$name', $request->file('photos')) as $photo) {
+                                        $$namePhoto = new $controllerPhotos();
+                                        $$namePhoto->photo = $photo;
+                                        $$name->photos()->save($$namePhoto);
+                                    }
+                                }
+                                foreach (active_langs() as $lang) {
+                                    $$name->translate($lang->code)->name = $request->name[$lang->code];
+                                    $$name->translate($lang->code)->description = $request->description[$lang->code];
+                                }
                 $$name->save();
             });
             alert()->success(__('messages.success'));

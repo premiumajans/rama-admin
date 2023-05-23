@@ -30,7 +30,22 @@ class ProductController extends Controller
     {
         check_permission('product create');
         try {
-
+            $product = new Product();
+            $product->photo = upload('product', $request->file('photo'));
+            $product->save();
+            foreach (active_langs() as $lang) {
+                $translation = new ProductTranslation();
+                $translation->locale = $lang->code;
+                $translation->product_id = $product->id;
+                $translation->name = $request->name[$lang->code];
+                $translation->description = $request->description[$lang->code];
+                $translation->save();
+            }
+            foreach (multi_upload('product', $request->file('photos')) as $photo) {
+                $productPhoto = new ProductPhotos();
+                $productPhoto->photo = $photo;
+                $product->photos()->save($productPhoto);
+            };
             alert()->success(__('messages.success'));
             return redirect(route('backend.product.index'));
         } catch (Exception $e) {
@@ -52,7 +67,23 @@ class ProductController extends Controller
         try {
             $product = Product::where('id', $id)->with('photos')->first();
             DB::transaction(function () use ($request, $product) {
-
+                if ($request->hasFile('photo')) {
+                    if (file_exists($product->photo)) {
+                        unlink(public_path($product->photo));
+                    }
+                    $product->photo = upload('product', $request->file('photo'));
+                }
+                if ($request->hasFile('photos')) {
+                    foreach (multi_upload('product', $request->file('photos')) as $photo) {
+                        $productPhoto = new ProductPhotos();
+                        $productPhoto->photo = $photo;
+                        $product->photos()->save($productPhoto);
+                    }
+                }
+                foreach (active_langs() as $lang) {
+                    $product->translate($lang->code)->name = $request->name[$lang->code];
+                    $product->translate($lang->code)->description = $request->description[$lang->code];
+                }
                 $product->save();
             });
             alert()->success(__('messages.success'));

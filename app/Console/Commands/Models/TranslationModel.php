@@ -10,7 +10,7 @@ class TranslationModel extends Command
 {
     protected $signature = 'app:translation-model {model}';
 
-    protected $description = 'Command description';
+    protected $description = '';
 
     public function handle()
     {

@@ -5,3 +5,4 @@
 <link href="{{asset('backend/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{asset('backend/css/app.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
 <link rel="icon" href="{{ asset('backend/images/favicon-admin.png') }}" type="image/x-icon">
+<link href="{{ asset('backend/libs/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css"/>

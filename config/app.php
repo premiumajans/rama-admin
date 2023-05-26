@@ -3,34 +3,21 @@
 use Illuminate\Support\Facades\Facade;
 
 return [
-
     'name' => env('APP_NAME', 'Dirnis.az'),
-
     'env' => env('APP_ENV', 'production'),
-
     'debug' => (bool) env('APP_DEBUG', false),
-
-    'url' => env('APP_URL', 'http://dirnis.az'),
-
+    'url' => env('APP_URL'),
     'asset_url' => env('ASSET_URL'),
-
     'timezone' => 'Asia/Baku',
-
     'locale' => 'az',
-
     'fallback_locale' => 'az',
-
     'faker_locale' => 'en_US',
-
     'key' => env('APP_KEY'),
-
     'cipher' => 'AES-256-CBC',
-
     'maintenance' => [
         'driver' => 'file',
         // 'store'  => 'redis',
     ],
-
     'providers' => [
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
@@ -68,12 +55,10 @@ return [
         Spatie\Analytics\AnalyticsServiceProvider::class,
         Laravolt\Avatar\ServiceProvider::class,
     ],
-
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
         'Avatar'    => Laravolt\Avatar\Facade::class,
         'DotenvEditor' => Brotzka\DotenvEditor\DotenvEditorFacade::class,
     ])->toArray(),
-
 ];

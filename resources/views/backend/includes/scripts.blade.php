@@ -12,3 +12,6 @@
 <script src="{{ asset('backend/js/pages/dashboard.init.js') }}"></script>
 <script src="{{ asset('backend/js/app.js') }}"></script>
 <script src="{{ asset('backend/js/pages/form-validation.init.js')}}"></script>
+<script src="{{ asset('backend/libs/sweetalert2/sweetalert2.min.js')}}"></script>
+<script src="{{ asset('backend/js/pages/sweet-alerts.init.js') }}"></script>
+

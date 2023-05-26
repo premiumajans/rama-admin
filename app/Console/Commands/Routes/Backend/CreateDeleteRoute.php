@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 class CreateDeleteRoute extends Command
 {
     protected $signature = 'create-delete-route {name} {controller}';
-    protected $description = 'Command description';
+    protected $description = '';
     public function handle()
     {
         $name = $this->argument('name');

@@ -75,16 +75,16 @@ class $controllerController extends Controller
                 $$name->photo = upload('$name',$request->file('photo'));
                 }
                 if ($request->hasFile('photos')) {
-                                    foreach (multi_upload('$name', $request->file('photos')) as $photo) {
-                                        $$namePhoto = new $controllerPhotos();
-                                        $$namePhoto->photo = $photo;
-                                        $$name->photos()->save($$namePhoto);
-                                    }
-                                }
-                                foreach (active_langs() as $lang) {
-                                    $$name->translate($lang->code)->name = $request->name[$lang->code];
-                                    $$name->translate($lang->code)->description = $request->description[$lang->code];
-                                }
+                   foreach (multi_upload('$name', $request->file('photos')) as $photo) {
+                   $$namePhoto = new $controllerPhotos();
+                   $$namePhoto->photo = $photo;
+                   $$name->photos()->save($$namePhoto);
+                   }
+                }
+                foreach (active_langs() as $lang) {
+                   $$name->translate($lang->code)->name = $request->name[$lang->code];
+                   $$name->translate($lang->code)->description = $request->description[$lang->code];
+                }
                 $$name->save();
             });
             alert()->success(__('messages.success'));

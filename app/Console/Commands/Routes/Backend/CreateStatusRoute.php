@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 class CreateStatusRoute extends Command
 {
     protected $signature = 'create-status-route {name} {controller}';
-    protected $description = 'Command description';
+    protected $description = '';
 
     public function handle()
     {

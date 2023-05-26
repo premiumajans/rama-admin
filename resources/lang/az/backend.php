@@ -222,5 +222,7 @@
   'portfolio' => 'Portfolio',
   'blog' => 'Blog',
   'catalog' => 'Kataloq',
-  'salam' => '',
+  'confirm-delete' => 'Silinməni təsdiqləyin',
+  'confrim' => 'Təsdiq edin',
+  'are-sure-delete' => 'Silmək istədiyinizə əminsiniz?',
 );

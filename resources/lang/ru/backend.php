@@ -167,5 +167,7 @@
   'product' => '',
   'portfolio' => '',
   'blog' => '',
-  'salam' => '',
+  'confirm-delete' => 'Подтвердите удаление',
+  'confrim' => 'Подтверждать',
+  'are-sure-delete' => 'Вы уверены, что хотите удалить?',
 );

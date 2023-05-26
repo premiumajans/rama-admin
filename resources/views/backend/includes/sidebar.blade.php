@@ -1,5 +1,5 @@
 <div class="vertical-menu">
-    <div data-simplebar class="h-100">
+    <div data-simplebar class="h-100" style="overflow-y: auto;">
         <div id="sidebar-menu">
             <ul class="metismenu list-unstyled" id="side-menu">
                 <li>
@@ -8,14 +8,6 @@
                         <span>@lang('backend.dashboard')</span>
                     </a>
                 </li>
-{{--                {{ creation('Catalog','Catalog',true,true) }}--}}
-{{--                {{ creation('Media','Media',true,true) }}--}}
-{{--                {{ creation('Service','Service',true,true) }}--}}
-{{--                {{ creation('Product','Product',true,true) }}--}}
-{{--                {{ creation('Portfolio','Portfolio',true,true) }}--}}
-{{--                {{ creation('Blog','Blog',true,true) }}--}}
-
-
                 <li class="menu-title">@lang('backend.site-setting')</li>
                 @can('content index')
                     <li>

@@ -10,7 +10,7 @@ class PhotoModel extends Command
 {
     protected $signature = 'app:photo-model {model}';
 
-    protected $description = 'Command description';
+    protected $description = '';
 
     public function handle()
     {

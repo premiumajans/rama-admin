@@ -44,7 +44,7 @@ class ContactController extends Controller
         activity()
             ->performedOn($message)
             ->event('read')
-            ->causedBy(auth()->user())
+            ->causedBy(auth()->guard('admin')->user())
             ->withProperties(['id' => $message->id, 'email' => $message->email, 'phone' => $message->phone, 'message' => $message->message])
             ->log('read');
         return view('backend.contact-us.read', get_defined_vars());

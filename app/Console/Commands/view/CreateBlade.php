@@ -8,7 +8,7 @@ class CreateBlade extends Command
 {
     protected $signature = 'app:create-blade {name}';
 
-    protected $description = 'Command description';
+    protected $description = '';
 
     public function handle()
     {

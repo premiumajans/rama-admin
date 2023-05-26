@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 class FillApiControllerCommand extends Command
 {
     protected $signature = 'app:fill-api-controller {controller}';
-    protected $description = 'Command description';
+    protected $description = '';
     public function handle()
     {
         $controllerName = $this->argument('controller');

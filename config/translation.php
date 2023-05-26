@@ -9,11 +9,8 @@ return [
     'scan_paths' => [app_path(), resource_path()],
     'ui_url' => 'admin/manage-languages',
     'database' => [
-
         'connection' => '',
-
         'languages_table' => 'languages',
-
         'translations_table' => 'translations',
     ],
 ];

@@ -8,8 +8,7 @@ use Illuminate\Support\Str;
 class CreateIndexRoute extends Command
 {
     protected $signature = 'create-api-route {name} {controller}';
-    protected $description = 'Command description';
-
+    protected $description = '';
     public function handle()
     {
         $name = $this->argument('name');

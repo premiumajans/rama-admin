@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 class MainModel extends Command
 {
     protected $signature = 'app:main-model {model}';
-    protected $description = 'Command description';
+    protected $description = '';
     public function handle()
     {
         $controllerName = $this->argument('model');

@@ -222,5 +222,7 @@
   'product' => '',
   'portfolio' => '',
   'blog' => '',
-  'salam' => '',
+  'confirm-delete' => 'Confirm Delete',
+  'confrim' => 'Confirm',
+  'are-sure-delete' => 'Are you sure you want to delete?',
 );

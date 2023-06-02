@@ -11,17 +11,19 @@ use App\Models\CategoryTranslation;
 use App\Models\SubCategory;
 use App\Models\SubCategoryTranslation;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use function Sodium\add;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        return view('backend.dashboard', get_defined_vars());
+       return view('backend.dashboard');
     }
 
     public function deletePhoto($modelName, $id)
     {
-        CRUDHelper::remove_item('\App\Models\\' . $modelName . 'Photos', $id);
+        check_permission(Str::lower($modelName) . ' delete');
+        return CRUDHelper::remove_item('\App\Models\\' . $modelName . 'Photos', $id);
     }
 }

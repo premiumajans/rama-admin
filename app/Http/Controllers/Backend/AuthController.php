@@ -28,11 +28,6 @@ class AuthController extends Controller
     {
         if ($this->guard()->attempt($request->only(['email', 'password']), $request->remember_me)) {
             $user = auth()->guard('admin')->user();
-            activity()
-                ->causedBy(Admin::class)
-                ->performedOn($user)
-                ->event('verified')
-                ->log('The user has verified the content model.');
             return redirect()->route('backend.dashboard');
         } else {
             activity()

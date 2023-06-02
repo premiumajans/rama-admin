@@ -3,13 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
-use Spatie\Activitylog\LogOptions;
-use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -21,11 +18,9 @@ class Admin extends Authenticatable
         HasApiTokens,
         HasProfilePhoto,
         Notifiable,
-        LogsActivity,
         TwoFactorAuthenticatable;
 
     protected $guard = 'admin';
-
     protected $fillable = [
         'name',
         'email',
@@ -43,14 +38,4 @@ class Admin extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
-    public function causer()
-    {
-        return $this->morphTo();
-    }
-    public function getActivitylogOptions(): LogOptions
-    {
-        return LogOptions::defaults()
-            ->logName('admin_activities')
-            ->causedBy($this); // Specify the user model class explicitly
-    }
 }

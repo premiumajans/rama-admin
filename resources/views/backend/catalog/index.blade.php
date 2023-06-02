@@ -1,5 +1,5 @@
 @extends('master.backend')
-@section('title',__('backend.blog'))
+@section('title',__('backend.catalog'))
 @section('styles')
     @include('backend.templates.components.dt-styles')
 @endsection

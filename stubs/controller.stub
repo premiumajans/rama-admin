@@ -69,9 +69,9 @@ class $controllerController extends Controller
             $$name = $controller::where('id', $id)->with('photos')->first();
             DB::transaction(function () use ($request, $$name) {
                 if($request->hasFile('photo')){
-                if(file_exists($$name->photo)){
-                unlink(public_path($$name->photo));
-                }
+                    if(file_exists($$name->photo)){
+                        unlink(public_path($$name->photo));
+                    }
                 $$name->photo = upload('$name',$request->file('photo'));
                 }
                 if ($request->hasFile('photos')) {

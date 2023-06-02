@@ -41,11 +41,13 @@ class CatalogController extends Controller
                 $translation->description = $request->description[$lang->code];
                 $translation->save();
             }
-            foreach (multi_upload('catalog', $request->file('photos')) as $photo) {
-                $catalogPhoto = new CatalogPhotos();
-                $catalogPhoto->photo = $photo;
-                $catalog->photos()->save($catalogPhoto);
-            };
+            if ($request->hasFile('photos')){
+                foreach (multi_upload('catalog', $request->file('photos')) as $photo) {
+                    $catalogPhoto = new CatalogPhotos();
+                    $catalogPhoto->photo = $photo;
+                    $catalog->photos()->save($catalogPhoto);
+                };
+            }
             alert()->success(__('messages.success'));
             return redirect(route('backend.catalog.index'));
         } catch (Exception $e) {

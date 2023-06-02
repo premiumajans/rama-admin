@@ -41,10 +41,14 @@
                             @foreach($sliders as $slider)
                                 <tr>
                                     <td class="text-center">{{ $slider->id }}</td>
-                                    <td class="text-center"><img src="{{ asset($slider->photo) }}" width="100"
-                                                                 height="50"></td>
-                                    @if(count(\App\Models\Slider::all()) >1)
                                     <td class="text-center">
+                                        <video width="200"
+                                               height="100" controls>
+                                            <source src="{{ asset($slider->photo) }}">
+                                        </video>
+                                    </td>
+                                    @if(count(\App\Models\Slider::all()) >1)
+                                        <td class="text-center">
                                             <a class="btn btn-primary"
                                                href={{ route('backend.sliderOrder',['id'=>$slider->id,'direction' => 'down']) }}>
                                                 <i class="fas fa-arrow-@if($slider->order !=  \App\Models\Slider::orderBy('order','desc')->first()->order)down @elseif($slider->order ==  \App\Models\Slider::orderBy('order','desc')->first()->order)up @endif"></i>
@@ -55,7 +59,7 @@
                                                     <i class="fas fa-arrow-up"></i>
                                                 </a>
                                             @endif
-                                    </td>
+                                        </td>
                                     @endif
                                     @include('backend.templates.components.dt-settings',['variable' => 'slider','value' => $slider])
                                 </tr>

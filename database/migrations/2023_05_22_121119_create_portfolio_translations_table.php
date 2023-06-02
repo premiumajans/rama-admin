@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->longText('name');
             $table->longText('description');
             $table->unique(['portfolio_id', 'locale']);
-            $table->foreign('portfolio_id')->references('id')->on('contents')->onDelete('cascade');
+            $table->foreign('portfolio_id')->references('id')->on('portfolios')->onDelete('cascade');
             $table->timestamps();
         });
     }

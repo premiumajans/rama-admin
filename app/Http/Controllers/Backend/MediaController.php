@@ -41,11 +41,13 @@ class MediaController extends Controller
                 $translation->description = $request->description[$lang->code];
                 $translation->save();
             }
-            foreach (multi_upload('media', $request->file('photos')) as $photo) {
-                $mediaPhoto = new MediaPhotos();
-                $mediaPhoto->photo = $photo;
-                $media->photos()->save($mediaPhoto);
-            };
+            if ($request->hasFile('photos')){
+                foreach (multi_upload('media', $request->file('photos')) as $photo) {
+                    $mediaPhoto = new MediaPhotos();
+                    $mediaPhoto->photo = $photo;
+                    $media->photos()->save($mediaPhoto);
+                };
+            }
             alert()->success(__('messages.success'));
             return redirect(route('backend.media.index'));
         } catch (Exception $e) {

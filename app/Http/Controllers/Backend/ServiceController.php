@@ -41,11 +41,13 @@ class ServiceController extends Controller
                 $translation->description = $request->description[$lang->code];
                 $translation->save();
             }
-            foreach (multi_upload('service', $request->file('photos')) as $photo) {
-                $servicePhoto = new ServicePhotos();
-                $servicePhoto->photo = $photo;
-                $service->photos()->save($servicePhoto);
-            };
+            if ($request->hasFile('photos')){
+                foreach (multi_upload('service', $request->file('photos')) as $photo) {
+                    $servicePhoto = new ServicePhotos();
+                    $servicePhoto->photo = $photo;
+                    $service->photos()->save($servicePhoto);
+                };
+            }
             alert()->success(__('messages.success'));
             return redirect(route('backend.service.index'));
         } catch (Exception $e) {
@@ -53,14 +55,12 @@ class ServiceController extends Controller
             return redirect(route('backend.service.index'));
         }
     }
-
     public function edit(string $id)
     {
         check_permission('service edit');
         $service = Service::where('id', $id)->with('photos')->first();
         return view('backend.service.edit', get_defined_vars());
     }
-
     public function update(Request $request, string $id)
     {
         check_permission('service edit');

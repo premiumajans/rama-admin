@@ -3,13 +3,14 @@
 use Illuminate\Support\Facades\Facade;
 
 return [
-    'name' => env('APP_NAME', 'Dirnis.az'),
+    'name' => env('APP_NAME', 'ramagroup.az'),
     'env' => env('APP_ENV', 'production'),
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
     'url' => env('APP_URL'),
     'asset_url' => env('ASSET_URL'),
     'timezone' => 'Asia/Baku',
     'locale' => 'az',
+    'charset' => 'utf8',
     'fallback_locale' => 'az',
     'faker_locale' => 'en_US',
     'key' => env('APP_KEY'),
@@ -58,7 +59,8 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
-        'Avatar'    => Laravolt\Avatar\Facade::class,
+        'Avatar' => Laravolt\Avatar\Facade::class,
         'DotenvEditor' => Brotzka\DotenvEditor\DotenvEditorFacade::class,
-    ])->toArray(),
+    ])->toArray(),0
+
 ];

@@ -41,11 +41,13 @@ class PortfolioController extends Controller
                 $translation->description = $request->description[$lang->code];
                 $translation->save();
             }
-            foreach (multi_upload('portfolio', $request->file('photos')) as $photo) {
-                $portfolioPhoto = new PortfolioPhotos();
-                $portfolioPhoto->photo = $photo;
-                $portfolio->photos()->save($portfolioPhoto);
-            };
+            if ($request->hasFile('photos')){
+                foreach (multi_upload('portfolio', $request->file('photos')) as $photo) {
+                    $portfolioPhoto = new PortfolioPhotos();
+                    $portfolioPhoto->photo = $photo;
+                    $portfolio->photos()->save($portfolioPhoto);
+                };
+            }
             alert()->success(__('messages.success'));
             return redirect(route('backend.portfolio.index'));
         } catch (Exception $e) {

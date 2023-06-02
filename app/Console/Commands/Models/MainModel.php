@@ -8,8 +8,9 @@ use Illuminate\Support\Str;
 
 class MainModel extends Command
 {
-    protected $signature = 'app:main-model {model}';
+    protected $signature = 'main-model {model}';
     protected $description = '';
+
     public function handle()
     {
         $controllerName = $this->argument('model');

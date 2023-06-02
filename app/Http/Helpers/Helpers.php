@@ -27,6 +27,23 @@ if (!function_exists('upload')) {
     }
 }
 
+if (!function_exists('video_upload')) {
+    function video_upload($file)
+    {
+        try {
+            if ($file->isValid()) {
+                $extension = $file->getClientOriginalExtension();
+                $filename = uniqid() . '.' . $extension;
+                $path = $file->move('videos', $filename);
+                return $path;
+            }
+            return null;
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+}
+
 if (!function_exists('pdf_upload')) {
     function pdf_upload($file)
     {
@@ -63,7 +80,6 @@ if (!function_exists('multi_upload')) {
             return $result;
         } catch (Exception $e) {
             return redirect()->back();
-
         }
     }
 }
@@ -77,7 +93,7 @@ if (!function_exists('creation')) {
         Artisan::call('create-resource-route ' . Str::lower($name) . ' ' . $name);
         Artisan::call('make:controller Api/' . $name . 'Controller');
         Artisan::call('fill-controller:functions ' . $name);
-        Artisan::call('fill-api-controller-command ' . $name);
+        Artisan::call('fill-api-controller ' . $name);
 
         $permissionSeederCommand = "sed -i \"s/\\\$permissions = \\\[/\\\$permissions = \\\[\\n        '" . Str::lower($name) . "',/\" database/seeders/PermissionsSeeder.php";
         exec($permissionSeederCommand);

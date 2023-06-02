@@ -42,6 +42,10 @@ class Kernel extends HttpKernel
         \App\Console\Commands\Controllers\FillControllerCommand::class,
         \App\Console\Commands\Routes\Api\CreateIndexRoute::class,
         \App\Console\Commands\Controllers\FillApiControllerCommand::class,
+        \App\Console\Commands\Models\MainModel::class,
+        \App\Console\Commands\Models\TranslationModel::class,
+        \App\Console\Commands\Models\PhotoModel::class,
+        \App\Console\Commands\lang\AddTranslationKey::class,
     ];
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
@@ -59,6 +63,6 @@ class Kernel extends HttpKernel
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
         'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
-        'admin' =>  \App\Http\Middleware\Admin::class,
+        'admin' => \App\Http\Middleware\Admin::class,
     ];
 }

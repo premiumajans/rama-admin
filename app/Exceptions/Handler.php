@@ -7,25 +7,15 @@ use Throwable;
 
 class Handler extends ExceptionHandler
 {
-    protected $levels = [
-        //
-    ];
-
-
-    protected $dontReport = [
-        //
-    ];
-
+    protected $levels = [];
+    protected $dontReport = [];
     protected $dontFlash = [
         'current_password',
         'password',
         'password_confirmation',
     ];
-
     public function register()
     {
-        $this->reportable(function (Throwable $e) {
-            //
-        });
+        $this->reportable(function (Throwable $e) {});
     }
 }

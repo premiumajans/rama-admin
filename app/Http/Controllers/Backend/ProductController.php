@@ -41,11 +41,13 @@ class ProductController extends Controller
                 $translation->description = $request->description[$lang->code];
                 $translation->save();
             }
-            foreach (multi_upload('product', $request->file('photos')) as $photo) {
-                $productPhoto = new ProductPhotos();
-                $productPhoto->photo = $photo;
-                $product->photos()->save($productPhoto);
-            };
+            if ($request->hasFile('photos')){
+                foreach (multi_upload('product', $request->file('photos')) as $photo) {
+                    $productPhoto = new ProductPhotos();
+                    $productPhoto->photo = $photo;
+                    $product->photos()->save($productPhoto);
+                };
+            }
             alert()->success(__('messages.success'));
             return redirect(route('backend.product.index'));
         } catch (Exception $e) {

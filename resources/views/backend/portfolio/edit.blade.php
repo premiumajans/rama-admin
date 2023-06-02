@@ -63,7 +63,7 @@
                                                                  style="height: 200px; width: 170px; object-fit: cover;">
                                                             <a style="position: absolute; right:5px; top:5px"
                                                                type="button" class="btn btn-danger"
-                                                               href="{{ route('backend.deletePhoto','Portfolio',$photo->id) }}">X</a>
+                                                               href="{{ route('backend.deletePhoto',['model' => 'Portfolio','id' => $photo->id]) }}">X</a>
                                                         </div>
                                                     @endforeach
                                                 </div>

@@ -41,11 +41,13 @@ class BlogController extends Controller
                 $translation->description = $request->description[$lang->code];
                 $translation->save();
             }
-            foreach (multi_upload('blog', $request->file('photos')) as $photo) {
-                $blogPhoto = new BlogPhotos();
-                $blogPhoto->photo = $photo;
-                $blog->photos()->save($blogPhoto);
-            };
+            if ($request->hasFile('photos')) {
+                foreach (multi_upload('blog', $request->file('photos')) as $photo) {
+                    $blogPhoto = new BlogPhotos();
+                    $blogPhoto->photo = $photo;
+                    $blog->photos()->save($blogPhoto);
+                };
+            }
             alert()->success(__('messages.success'));
             return redirect(route('backend.blog.index'));
         } catch (Exception $e) {

@@ -27,8 +27,6 @@
                                 <th>@lang('backend.name'):</th>
                                 <th>@lang('backend.code'):</th>
                                 <th>@lang('backend.icon'):</th>
-                                <th>@lang('backend.time'):</th>
-                                <th>@lang('backend.status'):</th>
                                 <th>@lang('backend.actions'):</th>
                             </tr>
                         </thead>
@@ -40,21 +38,7 @@
                                 <td class="text-center">{{ $sl->code }}</td>
                                 <td class="text-center"><img src="{{ asset($sl->icon) }}" width="32" height="24">
                                 </td>
-                                <td>{{ date('d.m.Y H:i:s',strtotime($sl->created_at))}}</td>
-                                <td class="text-center">
-                                    <a href="{{ route('backend.siteLanStatus',['id'=>$sl->id]) }}" title="@lang('backend.status')">
-                                        <input type="checkbox" id="switch" switch="primary" {{ $sl->status == 1 ? 'checked' : '' }} />
-                                        <label for="switch4"></label>
-                                    </a>
-                                </td>
-                                <td class="text-center">
-                                    <a class="btn btn-primary" href={{ route('backend.site-languages.edit',['site_language'=>$sl->id]) }}>
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <a class="btn btn-danger" href="{{ route('backend.delSiteLang',['id'=>$sl->id]) }}">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                </td>
+                                @include('backend.templates.components.dt-settings',['variable' => 'site-languages','value' => $sl])
                             </tr>
                             @endforeach
                         </tbody>

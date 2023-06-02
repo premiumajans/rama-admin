@@ -8,7 +8,7 @@ use Str;
 
 class TranslationModel extends Command
 {
-    protected $signature = 'app:translation-model {model}';
+    protected $signature = 'translation-model {model}';
 
     protected $description = '';
 

@@ -28,16 +28,27 @@
                                                                required="" value="{{ $slider->translate($lan->code)->title ?? __('backend.translation-not-found') }}">
                                                         {!! validation_response('backend.title') !!}
                                                     </div>
+                                                    <div class="mb-3">
+                                                        <label>@lang('backend.description') <span
+                                                                class="text-danger">*</span></label>
+                                                        <textarea class="form-control"
+                                                                  id="elm{{ $lan->code }}1"
+                                                                  name="description[{{$lan->code}}]">{!! $slider->translate($lan->code)->description ?? __('backend.translation-not-found') !!}</textarea>
+                                                        {!! validation_response('backend.description') !!}
+                                                    </div>
                                                 </div>
                                             </div>
                                         @endforeach
                                             <div class="mb-3">
-                                                <label>@lang('backend.photo') <span class="text-danger">*</span></label>
-                                                <input type="file" name="photo" class="form-control" required="" id="validationCustom">
+                                                <label>@lang('backend.video') <span class="text-danger">*</span></label>
+                                                <input type="file" name="photo" class="form-control mb-3" required=""
+                                                       id="validationCustom" accept="video/*" >
+                                                {!! validation_response('backend.video') !!}
                                                 @if(file_exists($slider->photo))
-                                                    <img src="{{ asset($slider->photo) }}" class="form-control mt-2">
+                                                    <video width="100%" controls>
+                                                        <source src="{{ asset($slider->photo) }}">
+                                                    </video>
                                                 @endif
-                                                {!! validation_response('backend.photo') !!}
                                             </div>
                                             <div class="mb-3">
                                                 <label>@lang('backend.alt') <span class="text-danger">*</span></label>
@@ -53,4 +64,7 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    @include('backend.templates.components.tiny')
 @endsection

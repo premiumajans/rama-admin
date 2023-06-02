@@ -8,10 +8,7 @@ use Illuminate\Support\Str;
 
 class PhotoModel extends Command
 {
-    protected $signature = 'app:photo-model {model}';
-
-    protected $description = '';
-
+    protected $signature = 'photo-model {model}';
     public function handle()
     {
         $controllerName = $this->argument('model');

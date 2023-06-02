@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 class FillApiControllerCommand extends Command
 {
-    protected $signature = 'app:fill-api-controller {controller}';
+    protected $signature = 'fill-api-controller {controller}';
     protected $description = '';
     public function handle()
     {

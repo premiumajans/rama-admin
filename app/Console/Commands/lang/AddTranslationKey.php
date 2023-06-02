@@ -8,9 +8,6 @@ use Illuminate\Support\Facades\File;
 class AddTranslationKey extends Command
 {
     protected $signature = 'translation:add {key}';
-
-    protected $description = 'Add a new translation key to all language files';
-
     public function handle()
     {
         $key = $this->argument('key');

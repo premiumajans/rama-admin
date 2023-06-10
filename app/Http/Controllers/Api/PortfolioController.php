@@ -19,7 +19,7 @@ class PortfolioController extends Controller
     public function show($id)
     {
         if (Portfolio::where('status', 1)->where('id', $id)->exists()) {
-            return response()->json(['portfolio' => Portfolio::where('status', 1)->where('id', $id)->first()], 200);
+            return response()->json(['portfolio' => Portfolio::$where('status', 1)->where('id', $id)->with('photos')->first()], 200);
         } else {
             return response()->json(['portfolio' => 'portfolio-is-not-founded'], 404);
         }

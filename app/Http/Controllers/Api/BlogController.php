@@ -19,7 +19,7 @@ class BlogController extends Controller
     public function show($id)
     {
         if (Blog::where('status', 1)->where('id', $id)->exists()) {
-            return response()->json(['blog' => Blog::where('status', 1)->where('id', $id)->first()], 200);
+            return response()->json(['blog' => Blog::$where('status', 1)->where('id', $id)->with('photos')->first()], 200);
         } else {
             return response()->json(['blog' => 'blog-is-not-founded'], 404);
         }

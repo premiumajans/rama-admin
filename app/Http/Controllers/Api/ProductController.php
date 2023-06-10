@@ -19,7 +19,7 @@ class ProductController extends Controller
     public function show($id)
     {
         if (Product::where('status', 1)->where('id', $id)->exists()) {
-            return response()->json(['product' => Product::where('status', 1)->where('id', $id)->first()], 200);
+            return response()->json(['product' => Product::$where('status', 1)->where('id', $id)->with('photos')->first()], 200);
         } else {
             return response()->json(['product' => 'product-is-not-founded'], 404);
         }

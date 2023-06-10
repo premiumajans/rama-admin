@@ -19,7 +19,7 @@ class MediaController extends Controller
     public function show($id)
     {
         if (Media::where('status', 1)->where('id', $id)->exists()) {
-            return response()->json(['media' => Media::$where('status', 1)->where('id', $id)->with('photos')->first()], 200);
+            return response()->json(['media' => Media::where('status', 1)->where('id', $id)->with('photos')->first()], 200);
         } else {
             return response()->json(['media' => 'media-is-not-founded'], 404);
         }

@@ -19,6 +19,8 @@ Route::group(['name' => 'api'], function () {
     Route::get('/service', [App\Http\Controllers\Api\ServiceController::class, 'index']);
     Route::get('/media/{id}', [App\Http\Controllers\Api\MediaController::class, 'show']);
     Route::get('/media', [App\Http\Controllers\Api\MediaController::class, 'index']);
+    Route::get('/partner/{id}', [App\Http\Controllers\Api\PartnerController::class, 'show']);
+    Route::get('/partner', [App\Http\Controllers\Api\PartnerController::class, 'index']);
     Route::get('/catalog/{id}', [App\Http\Controllers\Api\CatalogController::class, 'show']);
     Route::get('/catalog', [App\Http\Controllers\Api\CatalogController::class, 'index']);
     Route::get('/blog', [App\Http\Controllers\Api\BlogController::class, 'index']);

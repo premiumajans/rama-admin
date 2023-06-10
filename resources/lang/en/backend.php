@@ -144,6 +144,7 @@ return array (
   'our-team' => 'Our Team',
   'page' => 'Page',
   'pages' => 'Pages',
+  'partner' => 'Partners',
   'password' => 'Password',
   'pay-to-card' => 'Pay with Card',
   'payment-method' => 'Payment Method',

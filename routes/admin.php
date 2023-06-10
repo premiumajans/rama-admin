@@ -19,6 +19,8 @@ Route::group(['middleware' => 'auth:admin', 'as' => 'backend.'], function () {
     Route::post('change-alt-category', [App\Http\Controllers\Backend\ContentController::class, 'changeAltCategory'])->name('changeAltCategory');
     Route::get('delete/photo/{model}/{id}', [App\Http\Controllers\Backend\HomeController::class, 'deletePhoto'])->name('deletePhoto');
     Route::group(['name' => 'status'], function () {
+Route::get('partner/{id}/change-status',[App\Http\Controllers\Backend\PartnerController::class,'status'])->name('partnerStatus');
+
         Route::get('product/{id}/change-status', [App\Http\Controllers\Backend\ProductController::class, 'status'])->name('productStatus');
         Route::get('blog/{id}/change-status', [App\Http\Controllers\Backend\BlogController::class, 'status'])->name('blogStatus');
         Route::get('portfolio/{id}/change-status', [App\Http\Controllers\Backend\PortfolioController::class, 'status'])->name('portfolioStatus');
@@ -37,6 +39,8 @@ Route::group(['middleware' => 'auth:admin', 'as' => 'backend.'], function () {
         })->name('permissionsStatus');
     });
     Route::group(['name' => 'delete'], function () {
+Route::get('partner/{id}/delete',[App\Http\Controllers\Backend\PartnerController::class,'delete'])->name('partnerDelete');
+
         Route::get('product/{id}/delete', [App\Http\Controllers\Backend\ProductController::class, 'delete'])->name('productDelete');
         Route::get('blog/{id}/delete', [App\Http\Controllers\Backend\BlogController::class, 'delete'])->name('blogDelete');
         Route::get('portfolio/{id}/delete', [App\Http\Controllers\Backend\PortfolioController::class, 'delete'])->name('portfolioDelete');
@@ -59,6 +63,8 @@ Route::group(['middleware' => 'auth:admin', 'as' => 'backend.'], function () {
         Route::get('/newsletter/{id}/delete', [App\Http\Controllers\Backend\NewsletterController::class, 'delNewsletter'])->name('delNewsletter');
     });
     Route::group(['name' => 'resource'], function () {
+Route::resource('/partner',App\Http\Controllers\Backend\PartnerController::class);
+
         Route::resource('/product', App\Http\Controllers\Backend\ProductController::class);
         Route::resource('/blog', App\Http\Controllers\Backend\BlogController::class);
         Route::resource('/portfolio', App\Http\Controllers\Backend\PortfolioController::class);

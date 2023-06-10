@@ -144,6 +144,7 @@ return array (
   'our-team' => 'Komandamız',
   'page' => 'Səhifə',
   'pages' => 'Səhifələr',
+  'partner' => 'Partnyrolar',
   'password' => 'Şifrə',
   'pay-to-card' => 'Kartla ödəniş',
   'payment-method' => 'Ödəniş üsulu',

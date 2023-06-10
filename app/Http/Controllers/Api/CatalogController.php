@@ -19,7 +19,7 @@ class CatalogController extends Controller
     public function show($id)
     {
         if (Catalog::where('status', 1)->where('id', $id)->exists()) {
-            return response()->json(['catalog' => Catalog::$where('status', 1)->where('id', $id)->with('photos')->first()], 200);
+            return response()->json(['catalog' => Catalog::where('status', 1)->where('id', $id)->with('photos')->first()], 200);
         } else {
             return response()->json(['catalog' => 'catalog-is-not-founded'], 404);
         }

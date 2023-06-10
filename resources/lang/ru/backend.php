@@ -90,6 +90,7 @@ return array (
   'our-team' => 'Наша команда',
   'page' => 'Страница',
   'pages' => 'Страницы',
+  'partner' => 'Партнеры',
   'password' => 'Пароль',
   'pay-to-card' => 'Оплата картой',
   'payment-method' => 'Способ оплаты',

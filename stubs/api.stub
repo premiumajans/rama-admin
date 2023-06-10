@@ -19,7 +19,7 @@ class $controllerController extends Controller
     public function show($id)
     {
         if ($controller::where('status', 1)->where('id', $id)->exists()) {
-            return response()->json(['$name' => $controller::$where('status', 1)->where('id', $id)->with('photos')->first()], 200);
+            return response()->json(['$name' => $controller::where('status', 1)->where('id', $id)->with('photos')->first()], 200);
         } else {
             return response()->json(['$name' => '$name-is-not-founded'], 404);
         }
